@@ -19,7 +19,7 @@ export class TaskService {
     return this.taskRepository.addTask(task);
   }
 
-  changeTaskState(id: number): Task | null {
+  changeTaskState(id: number): Task | string {
     return this.taskRepository.changeTaskState(id);
   }
 

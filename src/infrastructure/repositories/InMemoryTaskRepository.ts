@@ -13,14 +13,14 @@ export class InMemoryTaskRepository implements TaskRepository {
     return task;
   }
 
-  changeTaskState(id: number): Task | null {
+  changeTaskState(id: number): Task | string {
     const task = this.tasksList.find((task) => task.id === id);
 
     if (task) {
       task.state = !task.state;
       return task;
     }
-    return null;
+    return `Task with ID ${id} is not exist`;
   }
 
   deleteTask(id: number): string {
