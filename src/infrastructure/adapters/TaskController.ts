@@ -32,7 +32,7 @@ export class TaskController {
       const addTaskDTO = new AddTaskDTO(title);
       const taskDTO = this.taskService.createTask(addTaskDTO.title);
 
-      res.status(200).json({
+      res.status(201).json({
         data: taskDTO,
       });
     } catch (error) {

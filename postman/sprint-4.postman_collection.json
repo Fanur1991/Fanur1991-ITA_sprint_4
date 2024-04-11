@@ -1,0 +1,166 @@
+{
+  "info": {
+    "_postman_id": "d80b7fcb-b751-4afd-909d-50e520289ddb",
+    "name": "sprint-4",
+    "description": "This collection encompasses all the necessary API endpoints for managing a simple Todo List. It is designed to provide an intuitive interface for creating, changing state, and deleting tasks.\n\nFeatures include:\n\n- **Add a Task**: Allows users to add new tasks to their list with a title.\n- **Complete a Task**: Users can mark tasks as completed, updating their status in the list.\n- **Delete a Task**: Provides the ability to remove tasks from the list permanently.\n- **List Tasks**: Retrieves a complete list of tasks, supporting basic filtering for better task management.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "31296943"
+  },
+  "item": [
+    {
+      "name": "Change task state",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "12345",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "user",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/tasks/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "tasks", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "1712849990272"
+            }
+          ]
+        },
+        "description": "This endpoint allows users to update the completion status of a specific task within the Todo List. It is designed to toggle the state of a task from incomplete to complete, or vice versa, based on its current status.\n\n**Example Request:**\n\n`PATCH /tasks/{id}`\n\nWhere `{id}` is the unique identifier of the task whose status is to be updated.\n\n**Example Successful Response:**\n\nStatus Code: `200 OK`\n\n``` json\n{\n\"id\": \"1712849990272\",\n\"title\": \"Learn Node.js\",\n\"state\": true,\n\"createdAt\": \"2024-04-11 22:43\"\n}\n\n ```\n\n**Example Error Response:**\n\nStatus Code: `404 Not Found`\n\n``` json\n{\n\"message\": \"Task not found.\"\n}\n\n ```"
+      },
+      "response": []
+    },
+    {
+      "name": "Add new task",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "12345",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "user",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"Learn Jest\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/tasks",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "tasks"]
+        },
+        "description": "This endpoint facilitates the creation of a new task in the Todo List. It is intended for users who wish to add new tasks to their list, helping them keep track of additional responsibilities or goals.  \n**Example Request:**\n\n`POST /tasks`\n\n**Example Request Body:**\n\n``` json\n{\n  \"title\": \"Learn Jest\"\n}\n\n ```\n\n**Example Successful Response:**\n\nStatus Code: `201 Created`\n\n``` json\n{\n  \"id\": 1712868201353,\n  \"title\": \"Learn Jest\",\n  \"state\": false,\n  \"createdAt\": \"2024-04-11 22:43\"\n}\n\n ```"
+      },
+      "response": []
+    },
+    {
+      "name": "Get tasks",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [""],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "12345",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "user",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/tasks",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "tasks"]
+        },
+        "description": "This endpoint is used to retrieve a list of tasks.\n\nUpon a successful execution, the API returns a status code of 200 along with a JSON response containing a message.\n\n**Example Request:**\n\n`GET /tasks`\n\n**Example Successful Response:**\n\nStatus Code: `200 OK`\n\n``` json\n[\n  {\n    \"id\": 1712868192365,\n    \"title\": \"Learn TypeScript\",\n    \"state\": false,\n    \"createdAt\": \"2024-04-11 22:43\"\n   },\n   {\n     \"id\": 1712868201353,\n      \"title\": \"Learn Jest\",\n      \"state\": false,\n      \"createdAt\": \"2024-04-11 22:43\"\n   }\n ]\n\n ```\n\n**Example Error Response:**\n\nIf there is an error in processing the request, the server might return a `500 Internal Server Error` status code.\n\nStatus Code: `500 Internal Server Error`\n\n```\n{\n  \"message\": \"Internal Server Error\"\n}\n\n ```"
+      },
+      "response": []
+    },
+    {
+      "name": "Delete task",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "12345",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "user",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/tasks/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "tasks", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "1712849990629"
+            }
+          ]
+        },
+        "description": "StartFragmentThis endpoint is utilized to remove a specific task from the Todo List. It requires the unique identifier (`id`) of the task to be specified in the URL.EndFragment\n\n`DELETE /tasks/{id}`\n\nWhere `{id}` is the unique identifier of the task to be deleted.\n\n**Example Successful Response:**\n\nStatus Code: `200 OK`\n\n``` json\n{\n\"message\": \"Task successfully deleted.\"\n}\n\n ```\n\n**Example Error Response:**\n\nStatus Code: `404 Not Found`\n\n``` json\n{\n\"message\": \"Task not found.\"\n}\n\n ```"
+      },
+      "response": []
+    }
+  ]
+}
