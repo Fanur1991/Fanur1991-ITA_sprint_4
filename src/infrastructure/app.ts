@@ -26,4 +26,4 @@ app.use(
     unauthorizedResponse: 'Unauthorized',
   })
 );
-app.use('/api/v1', taskRoutes);
+app.use('/api', taskRoutes);

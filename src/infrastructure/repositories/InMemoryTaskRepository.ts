@@ -20,15 +20,18 @@ export class InMemoryTaskRepository implements TaskRepository {
       task.state = !task.state;
       return task;
     }
-    return `Task with ID ${id} is not exist`;
+    return `Task was not found`;
   }
 
   deleteTask(id: number): string {
-    let taskTitle = '';
-    this.tasksList = this.tasksList.filter((task) => {
-      taskTitle = task.title;
-      return task.id !== id;
-    });
-    return `Task ${taskTitle} was deleted`;
+    const taskExists = this.tasksList.some((task) => task.id === id);
+
+    if (!taskExists) {
+      return 'Task not found';
+    }
+
+    this.tasksList = this.tasksList.filter((task) => task.id !== id);
+
+    return 'Task successfully deleted';
   }
 }
