@@ -40,7 +40,7 @@
             }
           ]
         },
-        "description": "This endpoint allows users to update the completion status of a specific task within the Todo List. It is designed to toggle the state of a task from incomplete to complete, or vice versa, based on its current status.\n\n**Example Request:**\n\n`PATCH /tasks/{id}`\n\nWhere `{id}` is the unique identifier of the task whose status is to be updated.\n\n**Example Successful Response:**\n\nStatus Code: `200 OK`\n\n``` json\n{\n\"id\": \"1712849990272\",\n\"title\": \"Learn Node.js\",\n\"state\": true,\n\"createdAt\": \"2024-04-11 22:43\"\n}\n\n ```\n\n**Example Error Response:**\n\nStatus Code: `404 Not Found`\n\n``` json\n{\n\"message\": \"Task not found.\"\n}\n\n ```"
+        "description": "This endpoint allows users to update the completion status of a specific task within the Todo List. It is designed to toggle the state of a task from incomplete to complete, or vice versa, based on its current status.\n\n**Example Request:**\n\n`PATCH /tasks/{id}`\n\nWhere `{id}` is the unique identifier of the task whose status is to be updated.\n\n**Example Successful Response:**\n\nStatus Code: `200 OK`\n\n``` json\n{\n\"id\": \"1712849990272\",\n\"title\": \"Learn Node.js\",\n\"state\": true,\n\"createdAt\": \"2024-04-11 22:43\"\n,\n\"updatedAt\": \"2024-04-11 22:43\"\n}\n\n ```\n\n**Example Error Response:**\n\nStatus Code: `404 Not Found`\n\n``` json\n{\n\"message\": \"Task not found.\"\n}\n\n ```"
       },
       "response": []
     },
@@ -80,7 +80,7 @@
           "port": "3000",
           "path": ["api", "tasks"]
         },
-        "description": "This endpoint facilitates the creation of a new task in the Todo List. It is intended for users who wish to add new tasks to their list, helping them keep track of additional responsibilities or goals.  \n**Example Request:**\n\n`POST /tasks`\n\n**Example Request Body:**\n\n``` json\n{\n  \"title\": \"Learn Jest\"\n}\n\n ```\n\n**Example Successful Response:**\n\nStatus Code: `201 Created`\n\n``` json\n{\n  \"id\": 1712868201353,\n  \"title\": \"Learn Jest\",\n  \"state\": false,\n  \"createdAt\": \"2024-04-11 22:43\"\n}\n\n ```"
+        "description": "This endpoint facilitates the creation of a new task in the Todo List. It is intended for users who wish to add new tasks to their list, helping them keep track of additional responsibilities or goals.  \n**Example Request:**\n\n`POST /tasks`\n\n**Example Request Body:**\n\n``` json\n{\n  \"title\": \"Learn Jest\"\n}\n\n ```\n\n**Example Successful Response:**\n\nStatus Code: `201 Created`\n\n``` json\n{\n  \"id\": 1712868201353,\n  \"title\": \"Learn Jest\",\n  \"state\": false,\n  \"createdAt\": \"2024-04-11 22:43\"\n,\n\"updatedAt\": \"2024-04-11 22:43\"\n}\n\n ```"
       },
       "response": []
     },
@@ -121,7 +121,7 @@
           "port": "3000",
           "path": ["api", "tasks"]
         },
-        "description": "This endpoint is used to retrieve a list of tasks.\n\nUpon a successful execution, the API returns a status code of 200 along with a JSON response containing a message.\n\n**Example Request:**\n\n`GET /tasks`\n\n**Example Successful Response:**\n\nStatus Code: `200 OK`\n\n``` json\n[\n  {\n    \"id\": 1712868192365,\n    \"title\": \"Learn TypeScript\",\n    \"state\": false,\n    \"createdAt\": \"2024-04-11 22:43\"\n   },\n   {\n     \"id\": 1712868201353,\n      \"title\": \"Learn Jest\",\n      \"state\": false,\n      \"createdAt\": \"2024-04-11 22:43\"\n   }\n ]\n\n ```\n\n**Example Error Response:**\n\nIf there is an error in processing the request, the server might return a `500 Internal Server Error` status code.\n\nStatus Code: `500 Internal Server Error`\n\n```\n{\n  \"message\": \"Internal Server Error\"\n}\n\n ```"
+        "description": "This endpoint is used to retrieve a list of tasks.\n\nUpon a successful execution, the API returns a status code of 200 along with a JSON response containing a message.\n\n**Example Request:**\n\n`GET /tasks`\n\n**Example Successful Response:**\n\nStatus Code: `200 OK`\n\n``` json\n[\n  {\n    \"id\": 1712868192365,\n    \"title\": \"Learn TypeScript\",\n    \"state\": false,\n    \"createdAt\": \"2024-04-11 22:43\"\n,\n    \"updatedAt\": \"2024-04-11 22:43\"\n   },\n   {\n     \"id\": 1712868201353,\n      \"title\": \"Learn Jest\",\n      \"state\": false,\n      \"createdAt\": \"2024-04-11 22:43\"\n, \n    \"updatedAt\": \"2024-04-11 22:43\"\n   }\n ]\n\n ```\n\n**Example Error Response:**\n\nIf there is an error in processing the request, the server might return a `500 Internal Server Error` status code.\n\nStatus Code: `500 Internal Server Error`\n\n```\n{\n  \"message\": \"Internal Server Error\"\n}\n\n ```"
       },
       "response": []
     },

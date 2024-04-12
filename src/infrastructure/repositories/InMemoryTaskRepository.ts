@@ -1,5 +1,6 @@
 import { Task } from '../../core/domain/entities/Task';
 import { TaskRepository } from '../../core/repositories/taskRepository';
+import { getFullDate } from '../../utils/getFullDate';
 
 export class InMemoryTaskRepository implements TaskRepository {
   private tasksList: Task[] = [];
@@ -13,14 +14,14 @@ export class InMemoryTaskRepository implements TaskRepository {
     return task;
   }
 
-  changeTaskState(id: number): Task | string {
+  changeTaskState(id: number): Task | any {
     const task = this.tasksList.find((task) => task.id === id);
 
     if (task) {
       task.state = !task.state;
+      task.updatedAt = getFullDate();
       return task;
     }
-    return `Task was not found`;
   }
 
   deleteTask(id: number): string {

@@ -3,4 +3,5 @@ export interface Task {
   title: string;
   state: boolean;
   createdAt: string;
+  updatedAt: string;
 }

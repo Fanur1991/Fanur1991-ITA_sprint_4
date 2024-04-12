@@ -15,11 +15,12 @@ export class TaskService {
       title,
       state: false,
       createdAt: getFullDate(),
+      updatedAt: getFullDate(),
     };
     return this.taskRepository.addTask(task);
   }
 
-  changeTaskState(id: number): Task | string {
+  changeTaskState(id: number): Task {
     return this.taskRepository.changeTaskState(id);
   }
 
