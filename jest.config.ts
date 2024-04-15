@@ -7,6 +7,7 @@ const config: Config = {
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
+  modulePathIgnorePatterns: ['src/utils/getFullDate'],
 };
 
 export default config;

@@ -1,3 +1,3 @@
 export class DeleteTaskDTO {
-  constructor(public id: number) {}
+  constructor(public id: string) {}
 }

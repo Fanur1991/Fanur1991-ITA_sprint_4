@@ -46,7 +46,7 @@ export class TaskController {
       return;
     } catch (error) {
       // Handle errors during the task creation process.
-      res.status(500).send('Error while creating task');
+      res.status(500).send('Failed to create task object');
     }
   }
 
@@ -54,18 +54,7 @@ export class TaskController {
     try {
       const { id } = req.params;
 
-      console.log(id);
-
-      const parsedId = parseInt(id);
-
-      // Validate the task ID format.
-      if (isNaN(parsedId)) {
-        res.status(400).json({
-          message: 'Invalid task ID format',
-        });
-        return;
-      }
-      const changeTaskStateDTO = new ChangeTaskStateDTO(parsedId);
+      const changeTaskStateDTO = new ChangeTaskStateDTO(id);
       const changedTaskStateDTO = this.taskService.changeTaskState(
         changeTaskStateDTO.id
       );
@@ -93,16 +82,7 @@ export class TaskController {
     try {
       const { id } = req.params;
 
-      const parsedId = parseInt(id);
-      // Validate the task ID format before proceeding with deletion.
-      if (isNaN(parsedId)) {
-        res.status(400).json({
-          message: 'Invalid task ID format',
-        });
-        return;
-      }
-
-      const deleteTaskDTO = new DeleteTaskDTO(parsedId);
+      const deleteTaskDTO = new DeleteTaskDTO(id);
       const deletedTaskDTO = this.taskService.deleteTask(deleteTaskDTO.id);
 
       // Check if the task was successfully deleted or not found.
@@ -118,7 +98,9 @@ export class TaskController {
       return;
     } catch (error) {
       // Handle any server error during the task deletion process.
-      res.status(500).send('Error while deleting task');
+      res.status(500).json({
+        message: 'Error while deleting task',
+      });
     }
   }
 }

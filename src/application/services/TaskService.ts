@@ -1,6 +1,7 @@
 import { TaskRepository } from '../../core/repositories/taskRepository';
 import { Task } from '../../core/domain/entities/Task';
 import { getFullDate } from '../../utils/getFullDate';
+import { v4 as uuidv4 } from 'uuid';
 
 export class TaskService {
   constructor(private taskRepository: TaskRepository) {}
@@ -13,7 +14,7 @@ export class TaskService {
   // Method to create a new task with the provided title and default values for other properties.
   createTask(title: string): Task {
     const task: Task = {
-      id: Date.now(),
+      id: uuidv4(),
       title,
       state: false,
       createdAt: getFullDate(),
@@ -23,12 +24,12 @@ export class TaskService {
   }
 
   // Method to change the state of a specific task by its ID.
-  changeTaskState(id: number): Task | null {
+  changeTaskState(id: string): Task | null {
     return this.taskRepository.changeTaskState(id);
   }
 
   // Method to delete a task by its ID and return a boolean indicating success.
-  deleteTask(id: number): boolean {
+  deleteTask(id: string): boolean {
     return this.taskRepository.deleteTask(id);
   }
 }

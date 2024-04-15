@@ -18,7 +18,7 @@ export class InMemoryTaskRepository implements TaskRepository {
     return task;
   }
 
-  changeTaskState(id: number): Task | null {
+  changeTaskState(id: string): Task | null {
     // Find the task by ID and toggle its state. Update the 'updatedAt' field if task exists.
     const task = this.tasksList.find((task) => task.id === id);
 
@@ -31,7 +31,7 @@ export class InMemoryTaskRepository implements TaskRepository {
     return null; // Return null if no task found.
   }
 
-  deleteTask(id: number): boolean {
+  deleteTask(id: string): boolean {
     // Remove a task by ID from the tasks list. Return true if successful, or false if task not found.
     const index = this.tasksList.findIndex((task) => task.id === id);
     if (index === -1) {

@@ -1,3 +1,3 @@
 export class ChangeTaskStateDTO {
-  constructor(public id: number) {}
+  constructor(public id: string) {}
 }
