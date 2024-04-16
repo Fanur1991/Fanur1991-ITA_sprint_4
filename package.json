@@ -4,7 +4,6 @@
   "description": "TODO app with Express.js and REST API",
   "main": "index.js",
   "scripts": {
-    "lint": "ts-standard",
     "dev": "ts-node-dev src/index.ts",
     "start": "nodemon --inspect dist/index.js",
     "tsc": "tsc",
