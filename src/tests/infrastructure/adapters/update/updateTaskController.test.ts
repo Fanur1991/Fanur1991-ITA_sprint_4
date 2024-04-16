@@ -6,9 +6,11 @@ import { InMemoryTaskRepository } from '../../../../infrastructure/repositories/
 import { Task } from '../../../../core/domain/entities/Task';
 import { getFullDate } from '../../../../utils/getFullDate';
 
+// Mock the uuid module to return a fixed value for consistent testing.
 jest.mock('uuid', () => ({
   v4: jest.fn(() => '123e4567-e89b-12d3-a456-426614174000'),
 }));
+// Mock the InMemoryTaskRepository to control its behavior for tests.
 jest.mock(
   '../../../../infrastructure/repositories/InMemoryTaskRepository',
   () => {
@@ -23,7 +25,7 @@ jest.mock(
           changeTaskState: jest.fn().mockImplementation((id) => {
             const task = tasks.find((t) => t.id === id);
             if (task) {
-              task.state = !task.state;
+              task.state = !task.state; // Update task's state and modification time.
               task.updatedAt = getFullDate();
               return task;
             }
@@ -43,7 +45,7 @@ describe('PATCH /api/tasks/:id', () => {
 
   beforeEach(() => {
     app = express();
-    app.use(express.json());
+    app.use(express.json()); // Middleware to parse JSON bodies.
     taskRepository = new InMemoryTaskRepository();
     taskService = new TaskService(taskRepository);
     taskController = new TaskController(taskService);
@@ -52,7 +54,7 @@ describe('PATCH /api/tasks/:id', () => {
     );
   });
 
-  test('должен успешно изменить статус задачи и вернуть 200 статус', async () => {
+  test('should successfully change the status of a task and return 200 status', async () => {
     const newTask = { title: 'Learn React' };
     const addedTask = await taskRepository.addTask({
       ...newTask,
@@ -66,7 +68,7 @@ describe('PATCH /api/tasks/:id', () => {
       .patch(`/api/tasks/${addedTask.id}`)
       .auth('user', '12345');
 
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(200); // Check for HTTP 200 (OK).
     expect(response.body.data).toEqual(
       expect.objectContaining({
         id: addedTask.id,
@@ -78,25 +80,29 @@ describe('PATCH /api/tasks/:id', () => {
     );
   });
 
-  test('должен возвращать 404, если задача не найдена', async () => {
+  test('should return 404 if the task is not found', async () => {
     const response = await request(app)
       .patch('/api/tasks/12345')
       .auth('user', '12345');
 
+    // Expect "Not Found" status code.
     expect(response.statusCode).toBe(404);
+    // Verify error message for clarity.
     expect(response.body.message).toEqual('Task not found');
   });
 
-  test('должен обрабатывать ошибки сервера и возвращать 500', async () => {
+  test('should handle server errors and return 500', async () => {
     taskService.changeTaskState = jest.fn().mockImplementation(() => {
-      throw new Error('Server error');
+      throw new Error('Server error'); // Simulate an error.
     });
 
     const response = await request(app)
       .patch('/api/tasks/1')
       .auth('user', '12345');
 
+    // Check for HTTP 500 (Server Error).
     expect(response.statusCode).toBe(500);
+    // Ensure the error message is correct.
     expect(response.body.message).toContain('Error while updating task');
   });
 });
